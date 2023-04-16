@@ -13,15 +13,15 @@ jobs:
       - run: docker build -t liceur/react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true liceur/react-test npm test
 
-      - run: docker build -t liceur/multi-docker/client ./client
-      - run: docker build -t liceur/multi-docker/nginx ./nginx
-      - run: docker build -t liceur/multi-docker/server ./server
-      - run: docker build -t liceur/multi-docker/worker ./worker
+      - run: docker build -t liceur/multi-cient ./client
+      - run: docker build -t liceur/multi-nginx ./nginx
+      - run: docker build -t liceur/multi-server ./server
+      - run: docker build -t liceur/multi-worker ./worker
 
-      - run: docker push liceur/multi-docker/client
-      - run: docker push liceur/multi-docker/nginx
-      - run: docker push liceur/multi-docker/server
-      - run: docker push liceur/multi-docker/worker
+      - run: docker push liceur/multi-cient
+      - run: docker push liceur/multi-nginx
+      - run: docker push liceur/multi-server
+      - run: docker push liceur/multi-worker
  
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
