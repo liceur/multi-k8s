@@ -12,10 +12,20 @@ jobs:
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - run: docker build -t liceur/react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true liceur/react-test npm test
+
       - run: docker build -t liceur/multi-docker ./client
       - run: docker build -t liceur/multi-docker ./nginx
       - run: docker build -t liceur/multi-docker ./server
       - run: docker build -t liceur/multi-docker ./worker
+
+      - run: docker push liceur/client
+      - run: docker push liceur/nginx
+      - run: docker push liceur/server
+      - run: docker push liceur/worker
  
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
+
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
