@@ -4,14 +4,14 @@ services:
     image: "liceur/multi-nginx"
     restart: always
     mem_limit: 128m
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
-    depends_on:
-      - api
-      - client
+    # build:
+    #   dockerfile: Dockerfile
+    #   context: ./nginx
+    # depends_on:
+    #   - api
+    #   - client
     ports:
-      - '3050:80'
+      - '80:80'
   server:
     image: "liceur/multi-server"
     mem_limit: 128m
